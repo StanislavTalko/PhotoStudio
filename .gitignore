@@ -1,0 +1,5 @@
+/*.vs
+/*.sln
+/PhotoStudio/*
+!/PhotoStudio/*.cs
+/PhotoStudio/*DataSet*.cs
