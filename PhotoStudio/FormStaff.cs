@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PhotoStudio
@@ -48,8 +42,8 @@ namespace PhotoStudio
 
            string selectCurrentPosition = "select Position from Staff where ID_Staff = " + id;
 
-            using (SqlCommand command = new SqlCommand(selectCurrentPosition, connection))
-            {
+           using (SqlCommand command = new SqlCommand(selectCurrentPosition, connection))
+           {
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -58,11 +52,11 @@ namespace PhotoStudio
                     buttonStaffList.Show();
                     currentPosition = reader[0].ToString();
                 }
-            }
+           }
 
-            connection.Close();
+           connection.Close();
 
-            doRefresh();
+           doRefresh();
         }
 
         private void FormStaff_FormClosed(object sender, FormClosingEventArgs e)
@@ -101,12 +95,12 @@ namespace PhotoStudio
             my_command.CommandText = "SELECT * FROM ShowMyOrders (@ID_Staff)";
             my_command.Parameters.Add("@ID_Staff", SqlDbType.Int);
             my_command.Parameters["@ID_Staff"].Value = id;
-
+            
             connection.Open();
 
             var temp = new DataTable();
             temp.Load(my_command.ExecuteReader());
-            dataGridViewRes.DataSource = temp;
+            dataGridViewMyOrders.DataSource = temp;
 
             connection.Close();
 
@@ -151,7 +145,36 @@ namespace PhotoStudio
 
         private void buttonDeleteFromMyOrders_Click(object sender, EventArgs e)
         {
+            SqlConnection connection = new SqlConnection(connString);
 
+            String selectedDate = dataGridViewMyOrders[2, dataGridViewMyOrders.CurrentRow.Index].Value.ToString().Replace(".", "-");
+            String selectedService = dataGridViewMyOrders[1, dataGridViewMyOrders.CurrentRow.Index].Value.ToString();
+            String delete = "UPDATE Log SET ID_Staff = null FROM Log JOIN Service ON Log.ID_Service = Service.ID_Service"  +
+                " WHERE Log.Due_Date = " + "'" + selectedDate + "' and ID_Staff = " + id +
+                " and Service.Service_Name = " + "'" + selectedService + "'";           
+
+            using (SqlCommand command = new SqlCommand(delete, connection))
+            {
+                connection.Open();
+
+                DialogResult result = MessageBox.Show(
+                    "Вы действительно хотите удалить данный заказ из своего списка заказов?",
+                    "Сообщение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button2,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.Yes)
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    doRefresh();
+                }
+                this.TopMost = true;
+
+                connection.Close();
+            }
         }
 
         private void buttonAddToDoneOrders_Click(object sender, EventArgs e)
@@ -161,7 +184,35 @@ namespace PhotoStudio
 
         private void buttonAddToMyOrders_Click(object sender, EventArgs e)
         {
+            SqlConnection connection = new SqlConnection(connString);
 
+            String selectedDate = dataGridViewAllOrders[2, dataGridViewAllOrders.CurrentRow.Index].Value.ToString().Replace(".", "-");
+            String selectedService = dataGridViewAllOrders[1, dataGridViewAllOrders.CurrentRow.Index].Value.ToString();
+            String addToMyOrders = "UPDATE Log SET ID_Staff = " + id + " FROM Log JOIN Service ON Log.ID_Service = Service.ID_Service" +
+                " WHERE Log.Due_Date = " + "'" + selectedDate + "'" + " and Service.Service_Name = " + "'" + selectedService + "'";
+
+            using (SqlCommand command = new SqlCommand(addToMyOrders, connection))
+            {
+                connection.Open();
+
+                DialogResult result = MessageBox.Show(
+                    "Вы действительно хотите взять данный заказ себе?",
+                    "Сообщение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button2,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.Yes)
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    doRefresh();
+                }
+                this.TopMost = true;
+
+                connection.Close();
+            }
         }
     }
 }

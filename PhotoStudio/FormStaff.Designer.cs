@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonStaffList = new System.Windows.Forms.Button();
             this.photoStudioDataSet = new PhotoStudio.PhotoStudioDataSet();
-            this.dataGridViewRes = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMyOrders = new System.Windows.Forms.DataGridView();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.dataGridViewAllOrders = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@
             this.buttonDeleteFromMyOrders = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.photoStudioDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMyOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDoneOrders)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -96,14 +96,14 @@
             this.photoStudioDataSet.DataSetName = "PhotoStudioDataSet";
             this.photoStudioDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // dataGridViewRes
+            // dataGridViewMyOrders
             // 
-            this.dataGridViewRes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewRes.Location = new System.Drawing.Point(0, 37);
-            this.dataGridViewRes.Name = "dataGridViewRes";
-            this.dataGridViewRes.RowTemplate.Height = 24;
-            this.dataGridViewRes.Size = new System.Drawing.Size(457, 231);
-            this.dataGridViewRes.TabIndex = 8;
+            this.dataGridViewMyOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMyOrders.Location = new System.Drawing.Point(0, 37);
+            this.dataGridViewMyOrders.Name = "dataGridViewMyOrders";
+            this.dataGridViewMyOrders.RowTemplate.Height = 24;
+            this.dataGridViewMyOrders.Size = new System.Drawing.Size(457, 231);
+            this.dataGridViewMyOrders.TabIndex = 8;
             // 
             // buttonRefresh
             // 
@@ -122,7 +122,7 @@
             this.dataGridViewAllOrders.Location = new System.Drawing.Point(0, 299);
             this.dataGridViewAllOrders.Name = "dataGridViewAllOrders";
             this.dataGridViewAllOrders.RowTemplate.Height = 24;
-            this.dataGridViewAllOrders.Size = new System.Drawing.Size(462, 256);
+            this.dataGridViewAllOrders.Size = new System.Drawing.Size(457, 256);
             this.dataGridViewAllOrders.TabIndex = 10;
             // 
             // label2
@@ -148,10 +148,10 @@
             // dataGridViewDoneOrders
             // 
             this.dataGridViewDoneOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewDoneOrders.Location = new System.Drawing.Point(468, 299);
+            this.dataGridViewDoneOrders.Location = new System.Drawing.Point(464, 299);
             this.dataGridViewDoneOrders.Name = "dataGridViewDoneOrders";
             this.dataGridViewDoneOrders.RowTemplate.Height = 24;
-            this.dataGridViewDoneOrders.Size = new System.Drawing.Size(457, 256);
+            this.dataGridViewDoneOrders.Size = new System.Drawing.Size(461, 256);
             this.dataGridViewDoneOrders.TabIndex = 13;
             // 
             // label4
@@ -226,14 +226,14 @@
             this.Controls.Add(this.dataGridViewAllOrders);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelCurrentUser);
-            this.Controls.Add(this.dataGridViewRes);
+            this.Controls.Add(this.dataGridViewMyOrders);
             this.Name = "FormStaff";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Фотостудия";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormStaff_FormClosed);
             this.Load += new System.EventHandler(this.FormStaff_Load);
             ((System.ComponentModel.ISupportInitialize)(this.photoStudioDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMyOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDoneOrders)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -249,7 +249,7 @@
         private System.Windows.Forms.Label label1;
         private PhotoStudioDataSet photoStudioDataSet;
         private System.Windows.Forms.Button buttonStaffList;
-        private System.Windows.Forms.DataGridView dataGridViewRes;
+        private System.Windows.Forms.DataGridView dataGridViewMyOrders;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.DataGridView dataGridViewAllOrders;
         private System.Windows.Forms.Label label2;

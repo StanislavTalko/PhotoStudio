@@ -7,6 +7,8 @@ namespace PhotoStudio
 {
     public partial class FormStaffList : Form
     {
+        string connString = @"Data Source = LAPTOP-6GPC8CGO\SQLEXPRESS; Initial Catalog = PhotoStudio; Integrated Security = True";
+
         public FormStaffList()
         {
             InitializeComponent();
@@ -37,7 +39,6 @@ namespace PhotoStudio
         {
             String FIO = "delete from Staff where FIO = " + "'" + comboBoxCheckFIO.Text + "'";
 
-            string connString = @"Data Source = LAPTOP-6GPC8CGO\SQLEXPRESS; Initial Catalog = PhotoStudio; Integrated Security = True";
             SqlConnection connection = new SqlConnection(connString);
 
             connection.Open();
@@ -68,7 +69,7 @@ namespace PhotoStudio
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
-            string connString = @"Data Source = LAPTOP-6GPC8CGO\SQLEXPRESS; Initial Catalog = PhotoStudio; Integrated Security = True";
+            
 
             String name = textBoxFirstName.Text;
             String surname = textBoxSurname.Text;
