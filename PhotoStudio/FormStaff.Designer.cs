@@ -44,6 +44,7 @@
             this.buttonAddToDoneOrders = new System.Windows.Forms.Button();
             this.buttonDeleteFromMyOrders = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonShowOrder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.photoStudioDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMyOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllOrders)).BeginInit();
@@ -199,19 +200,30 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonShowOrder);
             this.groupBox1.Controls.Add(this.buttonAddToDoneOrders);
             this.groupBox1.Controls.Add(this.buttonAddToMyOrders);
             this.groupBox1.Controls.Add(this.buttonDeleteFromMyOrders);
             this.groupBox1.Controls.Add(this.buttonRefresh);
             this.groupBox1.Controls.Add(this.buttonStaffList);
             this.groupBox1.Controls.Add(this.buttonChangeUser);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(464, 37);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(461, 231);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Панель действий";
+            // 
+            // buttonShowOrder
+            // 
+            this.buttonShowOrder.Location = new System.Drawing.Point(171, 133);
+            this.buttonShowOrder.Name = "buttonShowOrder";
+            this.buttonShowOrder.Size = new System.Drawing.Size(187, 47);
+            this.buttonShowOrder.TabIndex = 18;
+            this.buttonShowOrder.Text = "Просмотр заказа";
+            this.buttonShowOrder.UseVisualStyleBackColor = true;
+            this.buttonShowOrder.Click += new System.EventHandler(this.buttonShowOrder_Click);
             // 
             // FormStaff
             // 
@@ -230,7 +242,7 @@
             this.Name = "FormStaff";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Фотостудия";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormStaff_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormStaff_FormClosing);
             this.Load += new System.EventHandler(this.FormStaff_Load);
             ((System.ComponentModel.ISupportInitialize)(this.photoStudioDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMyOrders)).EndInit();
@@ -260,5 +272,6 @@
         private System.Windows.Forms.Button buttonAddToDoneOrders;
         private System.Windows.Forms.Button buttonDeleteFromMyOrders;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonShowOrder;
     }
 }

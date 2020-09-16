@@ -48,16 +48,20 @@
             this.dataGridViewMyOrders = new System.Windows.Forms.DataGridView();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.checkBoxActual = new System.Windows.Forms.CheckBox();
+            this.buttonOpenSelectedOrder = new System.Windows.Forms.Button();
+            this.logBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.logTableAdapter = new PhotoStudio.PhotoStudioDataSetTableAdapters.LogTableAdapter();
             this.groupBoxNewOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.serviceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.photoStudioDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMyOrders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(874, 493);
+            this.label1.Location = new System.Drawing.Point(20, 242);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 17);
             this.label1.TabIndex = 0;
@@ -67,14 +71,14 @@
             // labelCurrentUser
             // 
             this.labelCurrentUser.AutoSize = true;
-            this.labelCurrentUser.Location = new System.Drawing.Point(983, 493);
+            this.labelCurrentUser.Location = new System.Drawing.Point(129, 242);
             this.labelCurrentUser.Name = "labelCurrentUser";
             this.labelCurrentUser.Size = new System.Drawing.Size(0, 17);
             this.labelCurrentUser.TabIndex = 1;
             // 
             // buttonChangeUser
             // 
-            this.buttonChangeUser.Location = new System.Drawing.Point(877, 513);
+            this.buttonChangeUser.Location = new System.Drawing.Point(23, 262);
             this.buttonChangeUser.Name = "buttonChangeUser";
             this.buttonChangeUser.Size = new System.Drawing.Size(192, 29);
             this.buttonChangeUser.TabIndex = 2;
@@ -220,7 +224,7 @@
             // dataGridViewMyOrders
             // 
             this.dataGridViewMyOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMyOrders.Location = new System.Drawing.Point(806, 9);
+            this.dataGridViewMyOrders.Location = new System.Drawing.Point(448, 9);
             this.dataGridViewMyOrders.Name = "dataGridViewMyOrders";
             this.dataGridViewMyOrders.RowTemplate.Height = 24;
             this.dataGridViewMyOrders.Size = new System.Drawing.Size(364, 293);
@@ -229,7 +233,7 @@
             // buttonRefresh
             // 
             this.buttonRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonRefresh.Location = new System.Drawing.Point(1029, 308);
+            this.buttonRefresh.Location = new System.Drawing.Point(287, 245);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(141, 39);
             this.buttonRefresh.TabIndex = 5;
@@ -240,18 +244,38 @@
             // checkBoxActual
             // 
             this.checkBoxActual.AutoSize = true;
-            this.checkBoxActual.Location = new System.Drawing.Point(806, 308);
+            this.checkBoxActual.Location = new System.Drawing.Point(448, 308);
             this.checkBoxActual.Name = "checkBoxActual";
             this.checkBoxActual.Size = new System.Drawing.Size(209, 21);
             this.checkBoxActual.TabIndex = 6;
             this.checkBoxActual.Text = "Только актуальные записи";
             this.checkBoxActual.UseVisualStyleBackColor = true;
             // 
+            // buttonOpenSelectedOrder
+            // 
+            this.buttonOpenSelectedOrder.Location = new System.Drawing.Point(287, 290);
+            this.buttonOpenSelectedOrder.Name = "buttonOpenSelectedOrder";
+            this.buttonOpenSelectedOrder.Size = new System.Drawing.Size(141, 43);
+            this.buttonOpenSelectedOrder.TabIndex = 7;
+            this.buttonOpenSelectedOrder.Text = "Открыть выбранный заказ";
+            this.buttonOpenSelectedOrder.UseVisualStyleBackColor = true;
+            this.buttonOpenSelectedOrder.Click += new System.EventHandler(this.buttonOpenSelectedOrder_Click);
+            // 
+            // logBindingSource
+            // 
+            this.logBindingSource.DataMember = "Log";
+            this.logBindingSource.DataSource = this.photoStudioDataSet;
+            // 
+            // logTableAdapter
+            // 
+            this.logTableAdapter.ClearBeforeFill = true;
+            // 
             // FormClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 553);
+            this.ClientSize = new System.Drawing.Size(939, 498);
+            this.Controls.Add(this.buttonOpenSelectedOrder);
             this.Controls.Add(this.checkBoxActual);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.dataGridViewMyOrders);
@@ -262,13 +286,14 @@
             this.Name = "FormClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Фотостудия";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClient_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormClient_FormClosing);
             this.Load += new System.EventHandler(this.FormClient_Load);
             this.groupBoxNewOrder.ResumeLayout(false);
             this.groupBoxNewOrder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.serviceBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.photoStudioDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMyOrders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,5 +320,8 @@
         private System.Windows.Forms.DataGridView dataGridViewMyOrders;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.CheckBox checkBoxActual;
+        private System.Windows.Forms.Button buttonOpenSelectedOrder;
+        private System.Windows.Forms.BindingSource logBindingSource;
+        private PhotoStudioDataSetTableAdapters.LogTableAdapter logTableAdapter;
     }
 }

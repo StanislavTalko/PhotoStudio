@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace PhotoStudio
@@ -59,15 +60,10 @@ namespace PhotoStudio
            doRefresh();
         }
 
-        private void FormStaff_FormClosed(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
         private void buttonChangeUser_Click(object sender, EventArgs e)
         {
-            this.Close();
-            formAuth.Show();
+
+            Application.Restart();
         }
 
         private void buttonNewStaff_Click(object sender, EventArgs e)
@@ -179,7 +175,35 @@ namespace PhotoStudio
 
         private void buttonAddToDoneOrders_Click(object sender, EventArgs e)
         {
+            SqlConnection connection = new SqlConnection(connString);
 
+            String selectedDate = dataGridViewMyOrders[2, dataGridViewAllOrders.CurrentRow.Index].Value.ToString().Replace(".", "-");
+            String selectedService = dataGridViewMyOrders[1, dataGridViewAllOrders.CurrentRow.Index].Value.ToString();
+            String addToMyOrders = "UPDATE Log SET Order_Status = 'COMPLETED'" + " FROM Log JOIN Service ON Log.ID_Service = Service.ID_Service" +
+                " WHERE Log.Due_Date = " + "'" + selectedDate + "'" + " and Service.Service_Name = " + "'" + selectedService + "'";
+
+            using (SqlCommand command = new SqlCommand(addToMyOrders, connection))
+            {
+                connection.Open();
+
+                DialogResult result = MessageBox.Show(
+                    "Вы действительно хотите закрыть данный заказ?",
+                    "Сообщение",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button2,
+                    MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.Yes)
+                {
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    doRefresh();
+                }
+                this.TopMost = true;
+
+                connection.Close();
+            }
         }
 
         private void buttonAddToMyOrders_Click(object sender, EventArgs e)
@@ -211,6 +235,40 @@ namespace PhotoStudio
                 }
                 this.TopMost = true;
 
+                connection.Close();
+            }
+        }
+
+        private void FormStaff_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void buttonShowOrder_Click(object sender, EventArgs e)
+        {
+            SqlConnection connection = new SqlConnection(connString);
+            SqlCommand my_command = new SqlCommand();
+            my_command.Connection = connection;
+            my_command.CommandType = CommandType.Text;
+            String selectedOrder = "SELECT ID_Log FROM Log JOIN Service ON Log.ID_Service = Service.ID_Service JOIN Client ON Log.ID_Client = Client.ID_Client " +
+                "WHERE ID_Staff = " + id + " AND " +
+                "Client.FIO = " + "'" + dataGridViewMyOrders[0, dataGridViewMyOrders.CurrentRow.Index].Value.ToString() + "' AND " +
+                "Service.Service_Name = " + "'" + dataGridViewMyOrders[1, dataGridViewMyOrders.CurrentRow.Index].Value.ToString() + "' AND " +
+                "Log.Due_Date = " + "'" + dataGridViewMyOrders[2, dataGridViewMyOrders.CurrentRow.Index].Value.ToString() + "'";
+
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand(selectedOrder, connection))
+            {
+                SqlDataReader idReader = command.ExecuteReader();
+                if (idReader.HasRows)
+                {
+                    idReader.Read();
+                    int logId = Convert.ToInt32(idReader[0].ToString());
+                    Process.Start(@"D:\English\Profession\Projects\PhotoStudio\Photo\" + logId);
+                    this.TopMost = false;
+                    idReader.Close();
+                }
                 connection.Close();
             }
         }

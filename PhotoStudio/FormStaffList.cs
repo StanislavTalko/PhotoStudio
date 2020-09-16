@@ -69,8 +69,6 @@ namespace PhotoStudio
 
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
-            
-
             String name = textBoxFirstName.Text;
             String surname = textBoxSurname.Text;
             String patronymic = textBoxPatronymic.Text;
